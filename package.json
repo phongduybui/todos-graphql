@@ -1,0 +1,17 @@
+{
+  "name": "todos",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "dev": "npx lerna run start",
+    "client": "cd packages/client && yarn start",
+    "server": "cd packages/server && yarn start",
+    "db:sync": "cd packages/server && yarn run sync",
+    "db:force": "cd packages/server && yarn run force"
+  }
+}

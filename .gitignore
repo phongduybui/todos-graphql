@@ -1,0 +1,16 @@
+**/node_modules
+**/build
+**/.parcel-cache
+**/dist
+
+/.pnp
+.pnp.js
+
+# misc
+.DS_Store
+**/.env
+**/.env.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

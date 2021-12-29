@@ -1,0 +1,6 @@
+schema: http://localhost:5000/graphql
+generates:
+  ./src/__generated__/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
