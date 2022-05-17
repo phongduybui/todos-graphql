@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Form, Input, Radio, DatePicker } from 'antd';
 import {
   AddTaskInput,
   Priority,
   UpdateTaskInput,
 } from '../../../../__generated__/graphql';
+import moment from 'moment';
 
 interface AddTaskFormProps {
   visible: boolean;
@@ -24,6 +25,15 @@ const AddTask = ({
   data = {},
 }: AddTaskFormProps) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      ...data,
+      task_due: data?.task_due ? moment(data.task_due) : null,
+      priority: data?.priority || Priority.Medium,
+    });
+  }, [form, data]);
+
   return (
     <Modal
       visible={visible}
@@ -43,16 +53,10 @@ const AddTask = ({
           });
       }}
     >
-      <Form
-        form={form}
-        layout="vertical"
-        name="form_in_modal"
-        initialValues={{ modifier: 'public' }}
-      >
+      <Form form={form} layout="vertical" name="form_in_modal">
         <Form.Item
           name="task_name"
           label="Task name"
-          initialValue={data?.task_name}
           rules={[
             {
               required: true,
@@ -62,25 +66,13 @@ const AddTask = ({
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          name="task_description"
-          label="Description"
-          initialValue={data?.task_description}
-        >
+        <Form.Item name="task_description" label="Description">
           <Input type="textarea" aria-rowspan={5} />
         </Form.Item>
-        <Form.Item
-          label="Due date"
-          name="task_due"
-          // initialValue={data?.task_due}
-        >
+        <Form.Item label="Due date" name="task_due">
           <DatePicker showTime />
         </Form.Item>
-        <Form.Item
-          name="priority"
-          label="Priority"
-          initialValue={data?.priority || Priority.Medium}
-        >
+        <Form.Item name="priority" label="Priority">
           <Radio.Group>
             <Radio value={Priority.Low}>Low</Radio>
             <Radio value={Priority.Medium}>Medium</Radio>

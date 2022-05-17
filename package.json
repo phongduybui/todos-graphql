@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "npx lerna run start",
     "client": "cd packages/client && yarn start",
+    "client:gentype": "cd packages/client && yarn run generate",
     "server": "cd packages/server && yarn start",
     "db:sync": "cd packages/server && yarn run sync",
     "db:force": "cd packages/server && yarn run force"
